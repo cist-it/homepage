@@ -1,0 +1,19 @@
+---
+import type { MarkdownInstance } from 'astro';
+interface Frontmatter {
+    title: string;
+    description?: string;
+}
+
+const posts = Object.values(import.meta.glob<MarkdownInstance<Frontmatter>>('../pages/posts/**/*.md', { eager: true }));
+---
+
+<div>
+{posts.slice(0, 4).map((posts) => (
+  <article>
+    <h2>{posts.frontmatter.title}</h2>
+    <p>{posts.frontmatter.description}</p>
+    <a href={posts.url}>Read more</a>
+  </article>
+))}
+</div>
