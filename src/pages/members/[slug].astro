@@ -1,0 +1,42 @@
+---
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const members = await getCollection("members");
+  return members.map((member) => ({
+    params: { slug: member.slug },
+    props: { member },
+  }));
+}
+
+const { member } = Astro.props;
+const { Content } = await member.render();
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>{member.data.name}</title></head
+  >の自己紹介
+
+  <body class="bg-gray-100 p-8">
+    <main class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+      <h1 class="text-3xl font-bold text-blue-600 mb-2">{member.data.name}</h1>
+      <p class="text-gray-600 font-semibold mb-4 border-b pb-2">
+        役職: {member.data.role}
+      </p>
+
+      {
+        member.data.hobby && (
+          <p class="text-sm text-gray-500 mb-6 bg-gray-50 inline-block px-3 py-1 rounded">
+            趣味: {member.data.hobby}
+          </p>
+        )
+      }
+
+      <div class="prose">
+        <Content />
+      </div>
+    </main>
+  </body>
+</html>
