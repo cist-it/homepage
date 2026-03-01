@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection('blog'))
+---
+
+<div>
+  {
+    posts.slice(0, 4).map((post) => (
+      <article>
+        <h2>{post.data.title}</h2>
+        <p>{post.data.description}</p>
+        <a href={`/articles/${post.id}`}>Read more</a>
+      </article>
+    ))
+  }
+</div>
+
+<style>
+  .article-cards {
+    display: flex;
+
+  }
+
+  .article-card h2 {
+    background-color: aqua;
+    border: 1px solid black;
+  }
+</style>
