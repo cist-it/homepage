@@ -7,49 +7,28 @@ import choice3 from "../../assets/home_test_04.jpg";
 ---
 
 <meta charset="utf-8" />
-<div class="container">
-  <div class="top-container">
-    <img id="topPicture" src={topPicture.src} alt="" fetchpriority="high" />
-    <div class="top-text">
-      <h1>技術を学び、</h1>
-      <h1>創造し、共有する</h1>
-      <h2>私たちは技術に情熱を注ぐ学生のコミュニティです。</h2>
-      <h2>
-        プログラミング、デザイン、エンジニアリングを通じて、ともに成長していきます
-      </h2>
-    </div>
-    <button>Learn more</button>
+<div class="mainvisual">
+  <div class="text__content">
+    <div class="title">テキストテキスト</div>
   </div>
 </div>
 
-<script>
-  const para = document.querySelector("topPicture")!;
-  const compStyles = window.getComputedStyle(para);
-  const pictureHeight = compStyles.getPropertyValue("height");
-  console.log(pictureHeight);
-</script>
-
 <style>
-  .container {
-    height: 3000px;
+  body {
+    margin: 0;
   }
-  #topPicture {
-    top: 0;
-    left: 0;
+  .mainvisual {
+    height: 300px;
     width: 100%;
-    height: auto;
-    --picture-height: height;
-    z-index: -1;
+    background: url(../../assets/home_test_01.jpg) no-repeat center center /
+      cover;
+    position: relative;
   }
 
-  .top-container {
-    height: var(--picture-height);
-    line-height: var(--picture-height);
-    color: white;
-    text-align: center;
-  }
-
-  .top-text {
-    object-position: center;
+  .text__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 </style>
