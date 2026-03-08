@@ -1,18 +1,11 @@
 ---
-import Image from "astro/components/Image.astro";
+import { Image, getImage } from "astro:assets";
 import topPicture from "../../assets/home_test_01.jpg";
-import choice1 from "../../assets/home_test_02.jpg";
-import choice2 from "../../assets/home_test_03.jpg";
-import choice3 from "../../assets/home_test_04.jpg";
+import choice1 from "../../assets/rennsyuu1.jpg";
+import choice2 from "../../assets/rennsyuu2.jpg";
+import choice3 from "../../assets/rennsyuu3.jpg";
 
-// const tagen = ["interaction", "projects", "event&study"];
-// const tagjp = ["交流", "プロジェクト", "イベント・勉強会"];
-// const texts = [
-//   "同じ志を持つ仲間と交流し、刺激しあいます",
-//   "チームでアプリやWebサイトなどの作品を開発します",
-//   "定期的な勉強会やワークショップで新しい技術を学びます",
-// ];
-// const pictures = [choice1.src, choice2.src, choice3.src];
+const optimizedImage = await getImage({ src: choice1 });
 
 const choiceslist = [
   {
@@ -59,10 +52,22 @@ const choiceslist = [
     choiceslist.map((e) => (
       <>
         <div class="choices">
-          <h5>{e.tagen}</h5>
-          <h3>{e.tagjp}</h3>
-          <p>{e.text}</p>
-          <Image src={e.imagesrc} alt="a" width="50" height="50" />
+          <div class="text1">{e.tagen}</div>
+          <div class="text2">
+            <h3>{e.tagjp}</h3>
+            <div class="line" />
+            <h3>→</h3>
+            <br />
+            <p>{e.text}</p>
+          </div>
+          <Image
+            src={e.imagesrc}
+            widths={[90, 180, 360]}
+            sizes="(max-width: 768px) 90px, (max-width: 1024px) 180px, 360px"
+            quality={80}
+            alt="説明用画像1"
+            class="photo"
+          />
         </div>
       </>
     ))
@@ -114,13 +119,39 @@ const choiceslist = [
 
   .choices {
     height: 400px;
-    margin: 10px;
+    margin: 10px 30px;
     background-color: white;
     filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.1));
+    padding: 20px;
+    border-radius: 10px;
   }
 
-  .choices h5 {
+  .choices .text1 {
     color: rgb(57, 113, 181);
-    transform: rotate(90deg);
+    transform-origin: 0 50%;
+    transform: rotate(90deg) translateX(0px) translateY(-0px);
+  }
+
+  .choices .text2 {
+    position: absolute;
+    top: 40%;
+    left: 10%;
+  }
+
+  .choices .text2 h3 {
+    display: inline-block;
+    color: rgb(57, 113, 181);
+  }
+
+  .choices .text2 p {
+    display: inline-block;
+  }
+  .choices .text2 div {
+    height: 32px;
+    display: inline-block;
+    border: solid 1px black;
+  }
+
+  .photo {
   }
 </style>
