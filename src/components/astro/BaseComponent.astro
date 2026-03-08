@@ -1,28 +1,91 @@
 ---
-import { Image } from "astro:assets";
+import Image from "astro/components/Image.astro";
 import topPicture from "../../assets/home_test_01.jpg";
 import choice1 from "../../assets/home_test_02.jpg";
 import choice2 from "../../assets/home_test_03.jpg";
 import choice3 from "../../assets/home_test_04.jpg";
+
+// const tagen = ["interaction", "projects", "event&study"];
+// const tagjp = ["交流", "プロジェクト", "イベント・勉強会"];
+// const texts = [
+//   "同じ志を持つ仲間と交流し、刺激しあいます",
+//   "チームでアプリやWebサイトなどの作品を開発します",
+//   "定期的な勉強会やワークショップで新しい技術を学びます",
+// ];
+// const pictures = [choice1.src, choice2.src, choice3.src];
+
+const choiceslist = [
+  {
+    tagen: "interaction",
+    tagjp: "交流",
+    text: "同じ志を持つ仲間と交流し、刺激しあいます",
+    imagesrc: choice1,
+  },
+  {
+    tagen: "project",
+    tagjp: "プロジェクト",
+    text: "チームでアプリやWebサイトなどの作品を開発します",
+    imagesrc: choice2,
+  },
+  {
+    tagen: "event & study",
+    tagjp: "イベント・勉強会",
+    text: "定期的な勉強会やワークショップで新しい技術を学びます",
+    imagesrc: choice3,
+  },
+];
 ---
 
 <meta charset="utf-8" />
 <div class="mainvisual">
-  <div class="text__content">
-    <div class="title">テキストテキスト</div>
+  <div class="blackfilter">
+    <div class="text__content">
+      <div class="title">
+        <h1>技術を学び、<br />創造し、共有する</h1>
+        <h3>
+          私たちは技術に情熱を注ぐ学生のコミュニティです。<br
+          />プログラミング、デザイン、エンジニアリングを通じて、ともに成長していきます。
+        </h3>
+      </div>
+    </div>
   </div>
+</div>
+<div class="explanation">
+  <h1>what we do</h1>
+  <h3>
+    技術スキルの向上とコミュニティの成長を目指して、様々な活動を行っています。
+  </h3>
+  {
+    choiceslist.map((e) => (
+      <>
+        <div class="choices">
+          <h5>{e.tagen}</h5>
+          <h3>{e.tagjp}</h3>
+          <p>{e.text}</p>
+          <Image src={e.imagesrc} alt="a" width="50" height="50" />
+        </div>
+      </>
+    ))
+  }
 </div>
 
 <style>
   body {
     margin: 0;
+    background-color: rgb(240, 243, 250);
+    height: 1800px;
   }
   .mainvisual {
-    height: 300px;
+    height: 600px;
     width: 100%;
     background: url(../../assets/home_test_01.jpg) no-repeat center center /
       cover;
     position: relative;
+  }
+  .blackfilter {
+    height: 600px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
   }
 
   .text__content {
@@ -30,5 +93,34 @@ import choice3 from "../../assets/home_test_04.jpg";
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  .title {
+    text-align: center;
+    color: white;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+    white-space: nowrap;
+  }
+
+  .title h1 {
+    font-size: 48px;
+    line-height: 80px;
+  }
+
+  .title h3 {
+    opacity: 0.8;
+    font-weight: 500;
+  }
+
+  .choices {
+    height: 400px;
+    margin: 10px;
+    background-color: white;
+    filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.1));
+  }
+
+  .choices h5 {
+    color: rgb(57, 113, 181);
+    transform: rotate(90deg);
   }
 </style>
