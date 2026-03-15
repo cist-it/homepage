@@ -1,20 +1,20 @@
 ---
 import { getCollection } from "astro:content";
 
-const posts = (await getCollection('blog'))
+const posts = await getCollection('articles');
 ---
 
-<div>
+<ul>
   {
-    posts.slice(0, 4).map((post) => (
-      <article>
+    posts.map((post: { data: { title: string; description: string; }; id: any; }) => (
+      <li>
         <h2>{post.data.title}</h2>
         <p>{post.data.description}</p>
         <a href={`/articles/${post.id}`}>Read more</a>
-      </article>
+      </li>
     ))
   }
-</div>
+</ul>
 
 <style>
   .article-cards {
