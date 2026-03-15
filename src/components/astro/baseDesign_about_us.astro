@@ -1,243 +1,253 @@
 ---
-//javaを書くところ。
+//javascriptを書くところ。
 ---
 
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja" dir="ltr">
-    <head>
-        <meta charset="UTF-8" />
-        <!--スマホでも正しい大きさに（いらないかも)-->
-        <meta name="viewport" content="width=device-width, initialscale=1.0" />
-        <title>About - CIST IT community</title>
-        <style>
-            /*===全体のリセット・基本設定===*/
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
+  <head>
+    <meta charset="UTF-8" />
+    <!--スマホでも正しい大きさに（いらないかも)-->
+    <meta name="viewport" content="width=device-width, initialscale=1.0" />
+    <title>About - CIST IT COMMUNITY</title>
+    <style>
+      /*===全体のリセット・基本設定===*/
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-            body {
-                font-family: sans-serif;
-                color: #1a1a1a;
-                min-height: 100vh;
-                display: flex;
-                flex-direction: column;
-            }
+      body {
+        font-family: sans-serif;
+        color: #1a1a1a;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
 
-            /*=== ヘッダー ===*/
-            header {
-                background: white;
-                border-bottom: 1px solid #e5e7eb;
-                padding: 1rem 2rem;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
+      /*=== ヘッダー ===*/
+      header {
+        background: white;
+        border-bottom: 1px solid #e5e7eb;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
 
-            header .logo {
-                font-weight: bold;
-                font-size:1.2rem;
-                color: #6366f1;
-            }
+      header .logo {
+        font-weight: bold;
+        font-size: 1.2rem;
+        color: #6366f1;
+      }
 
-            header nav a {
-                margin-left: 1.5rem;
-                text-decoration: none;
-                color: #555;
-                font-size: 0.95rem;
-            }
+      header nav a {
+        margin-left: 1.5rem;
+        text-decoration: none;
+        color: #555;
+        font-size: 0.95rem;
+      }
 
-            headed nav a:hover {
-                color: #6366f1;
-            }
+      headed nav a:hover {
+        color: #6366f1;
+      }
 
-            /*===　メインコンテンツ ===*/
-            main {
-                flex: 1;/*フッターを一番下に押しやるらしいが...? */
-            }
+      /*===　メインコンテンツ ===*/
+      main {
+        flex: 1; /*フッターを一番下に押しやるらしいが...? */
+        /*残されたスペースを全て使用するという意味らしい。*/
+      }
 
-            /*=== ヒーローセクション(大きいタイトル) ===*/
-            .hero {
-                padding: 5rem 2rem;
-                /*グラデーション背景できるらしい*/
-                background: linear-gradient(135deg, #eef2ff, #faf5ff, #ecfdf5);
-                text-align: center;
-            }
+      /*=== ヒーローセクション(大きいタイトル) ===*/
+      .hero {
+        padding: 5rem 2rem;/*縦、横*/
+        /*グラデーション背景できるらしい*/
+        background: linear-gradient(135deg, #eef2ff, #faf5ff, #ecfdf5);
+        text-align: center;/*中央ぞろえ*/
+      }
 
-            .hero h1 {
-                font-size: 3rem;
-                font-weight: bold;
-                margin-bottom: 1rem;
-            }
+      .hero h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
 
-            .hero p {
-                font-size: 3rem;
-                color: #555;
-            }
+      .hero p {
+        font-size: 3rem;
+        color: #555;
+      }
 
-            /*===カード(白いやつ)===*/
-            .card {
-                background: white;
-                border: 1px solid #e5e7eb;
-                border-radius: 12px;
-                box-shadow: 0 2px 8px rgba(0,0,0,0,06);
-                padding: 3rem;
-                max-width: 800px;
-                margin: 0 auto; 
-            }
+      /*===カード(白いやつ)===*/
+      .card {
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0, 06);
+        padding: 3rem;
+        max-width: 800px;/*文章の折り返しに関与*/
+        margin: 0 auto;
+      }
 
-            .card h2 {
-                font-size: 1.8rem;
-                font-weight: bold;
-                margin-bottom: 1.5rem;
-            }
+      .card h2 { /*cardの中のh2*/
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+      }
 
-            .card p {
-                color: #666;
-                line-height: 1.8;
-                margin-bottom: 1rem;
-            }
+      .card p {
+        color: #666;
+        line-height: 1.8;
+        margin-bottom: 1rem;
+      }
 
-            /*===各セクション共通===*/
-            section {
-                padding: 4rem 2rem;
-            }
-            
-            section.gray-bg {
-                background: #f9fafb;
-            }
+      /*===各セクション共通===*/
+      section {
+        padding: 4rem 2rem;
+      }
 
-            /* ===沿革（年表）===*/
-            .history-item {
-                display: flex;
-                gap: 2rem;
-                margin-bottom: 1.5rem;
-            }
+      section.gray-bg {
+        background: #f9fafb;
+      }
 
-            .history-year {
-                flex-shrink: 0;
-                width: 6rem;
-                font-weight: bold;
-                font-family: monospace;
-                font-size: 1rem;
-                color: #6366f1;
-            }
+      /* ===沿革（年表）===*/
+      .history-item {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 1.5rem;
+      }
 
-            .history-item:nth-child(2) .history-year { color: #8b5cf6; }
-            .history-item:nth-child(3) .history-year { color: #10b981; }
+      .history-year {
+        flex-shrink: 0;
+        width: 6rem;
+        font-weight: bold;
+        font-family: monospace;
+        font-size: 1rem;
+        color: #6366f1;
+      }
 
-            .history-text {
-                color: #666;
-                line-height: 1.8;
-            }
+      .history-item:nth-child(2) .history-year {
+        color: #8b5cf6;
+      }
+      .history-item:nth-child(3) .history-year {
+        color: #10b981;
+      }
 
-            /*===理念セクション===*/
-            .philosophy-block {
-                margin-bottom: 2rem; 
-            }
+      .history-text {
+        color: #666;
+        line-height: 1.8;
+      }
 
-            .philosophy-block h3 {
-                font-size: 1.1rem;
-                font-weight: 600;
-                margin-bottom: 0.75rem;
-            }
+      /*===理念セクション===*/
+      .philosophy-block {
+        margin-bottom: 2rem;
+      }
 
-            .philosophy-block ul {
-                list-style: disc;
-                padding-left: 1.5rem;
-                color: #666;
-                line-height: 1.8;
-            }
+      .philosophy-block h3 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+      }
 
-            /*===フッター===*/
-            footer {
-                background: #1a1a1a;
-                color: #aaa;
-                text-align: center;
-                padding: 2rem;
-                font-size: 0.9rem;
-            }
-        </style>  
-    </head>
+      .philosophy-block ul {
+        list-style: disc;
+        padding-left: 1.5rem;
+        color: #666;
+        line-height: 1.8;
+      }
 
-    <body>
-        <!-- ヘッダー -->
-        <header>
-            <div class="logo">CIST IT community</div>
-            <nav>
-                <!--ハイパーリンク -->
-                <a href="/">ホーム</a>
-                <a href="/about">About</a>
-                <a href="/contact">お問い合わせ</a>
-            </nav>
-        </header>
+      /*===フッター===*/
+      footer {
+        background: #1a1a1a;
+        color: #aaa;
+        text-align: center;
+        padding: 2rem;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
 
-        <main>
-            <!--[1]ヒーローセクション-->
-            <section class="hero">
-                <h1>About Us</h1>
-                <p>CIST IT communityについて</p>
-            </section>
+  <body>
+    <!-- ヘッダー -->
+    <header>
+      <div class="logo">CIST IT COMMUNITY</div>
+      <nav>
+        <!--ハイパーリンク -->
+        <a href="/">ホーム</a>
+        <a href="/about">About</a>
+        <a href="/contact">お問い合わせ</a>
+      </nav>
+    </header>
 
-            <!--[2]サークルについて-->
-            <section>
-                <div class="card">
-                    <h2>サークルについて</h2>
-                    <p>ここにサークルの説明を入れる。サークルの目的、活動内容、雰囲気等を記す。</p>
-                    <p>メンバー構成、活動頻度、主な活動場所。</p>
-                    <p>サークルの特徴や魅力を伝える内容を記載。</p>
-                </div>
-            </section>
+    <main>
+      <!--[1]ヒーローセクション-->
+      <section class="hero">
+        <h1>About Us</h1>
+        <p>CIST IT COMMUNITYについて</p>
+      </section>
 
-            <!--[3]沿革、歴史-->
-            <section class="gray-bg" id="history">
-                <div class="card">
-                    <h2>沿革</h2>
+      <!--[2]サークルについて-->
+      <section>
+        <div class="card">
+          <h2>サークルについて</h2>
+          <p>
+            CIST IT COMMUNITY は、IT 技術に興味を持つ学生が集まり、プログラミングやアプリ開発、Web制作などを通して技術力を高めることを目的としたサークルです。</br>
+            活動では、Webサイトやアプリの開発、プログラミングの勉強会、チームでの開発プロジェクトなどを行っています。</br>
+            初心者でも参加できるように、先輩が開発環境の構築や基礎知識をサポートしながら、実際に手を動かして学ぶことを大切にしています。</br>
+            また、GitHub などの開発ツールを使ったチーム開発にも挑戦し、実際のIT業界に近い形での開発経験を積むことができます。</br>
+            IT に興味がある人、プログラミングを始めてみたい人、チームで何かを作ってみたい人、大歓迎です！</br>
+          </p>
+          <p>メンバー構成、活動頻度、主な活動場所。</p>
+          <p>サークルの特徴や魅力を伝える内容を記載。</p>
+        </div>
+      </section>
 
-                    <div class="history-item">
-                        <div class="history-year">20XX年</div>
-                        <div class="history-text">ここにサークル設立の経緯など書く</div>
-                    </div>
+      <!--[3]沿革、歴史-->
+      <section class="gray-bg" id="history">
+        <div class="card">
+          <h2>沿革</h2>
 
-                    <div class="history-item">
-                        <div class="history-year">20XX年</div>
-                        <div class="history-text">イベントなど書く</div>
-                    </div>
+          <div class="history-item">
+            <div class="history-year">20XX年</div>
+            <div class="history-text">ここにサークル設立の経緯など書く</div>
+          </div>
 
-                    <div class="history-item">
-                        <div class="history-year">20XX年</div>
-                        <div class="history-text">その他情報を書く</div>
-                    </div>
-                </div>
-            </section>
+          <div class="history-item">
+            <div class="history-year">20XX年</div>
+            <div class="history-text">イベントなど書く</div>
+          </div>
 
-            <!-- [4]理念 -->
-            <section id="philosopy">
-                <div class="card">
-                    <h2>サークル理念</h2>
+          <div class="history-item">
+            <div class="history-year">20XX年</div>
+            <div class="history-text">その他情報を書く</div>
+          </div>
+        </div>
+      </section>
 
-                    <div class="philosopy-block">
-                        <h3>ミッション</h3>
-                        <p>サークルが目指すミッション・使命を書く。</p>
-                    </div>
+      <!-- [4]理念 -->
+      <section id="philosopy">
+        <div class="card">
+          <h2>サークル理念</h2>
 
-                    <div class="philosophy-block">
-                        <h3>バリュー</h3>
-                        <ul>
-                            <li>大切にしている価値観</li>
-                            <li>大切にしている価値観</li>
-                            <li>大切にしている価値観</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-        </main>
+          <div class="philosopy-block">
+            <h3>ミッション</h3>
+            <p>サークルが目指すミッション・使命を書く。</p>
+          </div>
 
-        <!-- フッタ（仮）-->
-        <footer>
-            <p>© 2026 CIST IT community. All rights reserved.</p>
-        </footer>
-    </body>
+          <div class="philosophy-block">
+            <h3>バリュー</h3>
+            <ul>
+              <li>大切にしている価値観</li>
+              <li>大切にしている価値観</li>
+              <li>大切にしている価値観</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- フッタ（仮）-->
+    <footer>
+      <p>© 2026 CIST IT COMMUNTY. All rights reserved.</p>
+    </footer>
+  </body>
 </html>
