@@ -2,19 +2,77 @@
 
 ---
 
-<div id="container">
-  <section id="background">
+<div class="container">
+  <section class="background">
     <h1>Projects</h1>
     <p>メンバーが作成したプロジェクトを紹介します</p>
+  </section>
+
+  <section class="grid">
+    <section class="card">
+      <img src="/src/assets/astro.svg" class="card-img" />
+      <h2>プロジェクト1</h2>
+      <p>making our homepage</p>
+    </section>
+
+    <section class="card">
+      <img src="/src/assets/astro.svg" class="card-img" />
+      <h2>プロジェクト2</h2>
+      <p>making our homepage</p>
+    </section>
+
+    <section class="card">
+      <img src="/src/assets/astro.svg" class="card-img" />
+      <h2>プロジェクト3</h2>
+      <p>making our homepage</p>
+    </section>
+
+    <section class="card">
+      <img src="/src/assets/astro.svg" class="card-img" />
+      <h2>プロジェクト4</h2>
+      <p>making our homepage</p>
+    </section>
   </section>
 </div>
 
 <style>
   .container {
-    color: #f0f3fa;
+    background-color: #f0f3fa;
   }
 
   .background {
-    color: #73bcc9;
+    background-color: #73bcc9;
+    padding: 5rem 2rem;
+  }
+
+  .background h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 3rem;
+    font-weight: bold;
+  }
+
+  .background p {
+    text-align: center;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2列にする */
+    gap: 20px; /* 枠の間のスペース */
+    margin: 40px;
+  }
+
+  .card {
+    width: auto;
+    padding: 30px;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .card-img {
+    width: 100%;
+    border-radius: 8px;
   }
 </style>
