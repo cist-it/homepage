@@ -13,18 +13,21 @@ const choiceslist = [
     tagjp: "交流",
     text: "同じ志を持つ仲間と交流し、刺激しあいます",
     imagesrc: choice1,
+    class: "first",
   },
   {
     tagen: "project",
     tagjp: "プロジェクト",
     text: "チームでアプリやWebサイトなどの作品を開発します",
     imagesrc: choice2,
+    class: "second",
   },
   {
     tagen: "event & study",
     tagjp: "イベント・勉強会",
     text: "定期的な勉強会やワークショップで新しい技術を学びます",
     imagesrc: choice3,
+    class: "third",
   },
 ];
 ---
@@ -44,30 +47,37 @@ const choiceslist = [
   </div>
 </div>
 <div class="explanation">
-  <h1>what we do</h1>
-  <h3>
+  <p class="exp-title">What we do</p>
+  <p class="exp-comment">
     技術スキルの向上とコミュニティの成長を目指して、様々な活動を行っています。
-  </h3>
+  </p>
   {
     choiceslist.map((e) => (
       <>
-        <div class="choices">
-          <div class="text1">{e.tagen}</div>
-          <div class="text2">
-            <h3>{e.tagjp}</h3>
-            <div class="line" />
-            <h3>→</h3>
-            <br />
-            <p>{e.text}</p>
+        <div class:list={[`choices`, e.class]}>
+          <div class="text1">
+            <p>{e.tagen}</p>
           </div>
-          <Image
-            src={e.imagesrc}
-            widths={[90, 180, 360]}
-            sizes="(max-width: 768px) 90px, (max-width: 1024px) 180px, 360px"
-            quality={80}
-            alt="説明用画像1"
-            class="photo"
-          />
+          <div class="text2">
+            <p>
+              <span class="tag">{e.tagjp}</span>
+              <>
+                <span class="arrow">→</span>
+                <br />
+              </>
+              {e.text}
+            </p>
+          </div>
+          <div class="photo-frame">
+            <Image
+              src={e.imagesrc}
+              widths={[90, 180, 360]}
+              sizes="(max-width: 768px) 90px, (max-width: 1024px) 180px, 360px"
+              quality={80}
+              alt="説明用画像1"
+              class="photo"
+            />
+          </div>
         </div>
       </>
     ))
@@ -76,10 +86,12 @@ const choiceslist = [
 
 <style>
   body {
-    margin: 0;
+    margin: 0 0 1.5em 0;
     background-color: rgb(240, 243, 250);
-    height: 1800px;
+    height: auto;
+    font-family:;
   }
+
   .mainvisual {
     height: 600px;
     width: 100%;
@@ -117,41 +129,96 @@ const choiceslist = [
     font-weight: 500;
   }
 
+  .exp-title {
+    padding-left: 30px;
+    margin: 0.7em 0 0 0;
+    font-size: 3em;
+    font-weight: 800;
+  }
+
+  .exp-comment {
+    padding-left: 30px;
+    margin: 0 0 1em 0;
+    color: rgb(100, 116, 139);
+  }
+
   .choices {
     height: 400px;
     margin: 10px 30px;
     background-color: white;
     filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.1));
-    padding: 20px;
+    padding: 0 20px;
     border-radius: 10px;
   }
 
   .choices .text1 {
+    position: absolute;
+    height: 100%;
+    width: 1em;
+    border-right: 1.5px solid rgb(186, 195, 201);
+  }
+
+  .choices .text1 p {
+    position: absolute;
     color: rgb(57, 113, 181);
     transform-origin: 0 50%;
     transform: rotate(90deg) translateX(0px) translateY(-0px);
+    white-space: nowrap;
   }
 
   .choices .text2 {
     position: absolute;
     top: 40%;
     left: 10%;
-  }
-
-  .choices .text2 h3 {
-    display: inline-block;
-    color: rgb(57, 113, 181);
+    display: flex;
   }
 
   .choices .text2 p {
     display: inline-block;
+    line-height: 2em;
   }
+
+  .choices .text2 p span {
+    color: rgb(57, 113, 181);
+    padding-right: 5px;
+    font-weight: 700;
+    font-size: large;
+  }
+
+  @media screen and (min-width: 1100px) {
+    p br {
+      display: none;
+    }
+  }
+
   .choices .text2 div {
     height: 32px;
     display: inline-block;
     border: solid 1px black;
   }
 
+  .photo-frame {
+    aspect-ratio: 1/1;
+    height: 80%;
+    width: auto;
+    position: relative;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%) translateX(-330px);
+    overflow: hidden;
+  }
+
   .photo {
+    height: 100%;
+    width: auto;
+    transition: 0.3s;
+  }
+
+  .first:hover,
+  .second:hover,
+  .third:hover {
+    .photo {
+      transform: scale(1.1);
+    }
   }
 </style>
