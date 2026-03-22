@@ -1,0 +1,11 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+type Props = CollectionEntry<'members'>['content'];
+
+const {name, role, hobby} = Astro.props;
+---
+
+<a href="/posts/sample">dfsa</a>
+{name},{role},{hobby}
+<slot />
