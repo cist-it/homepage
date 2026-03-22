@@ -1,26 +1,17 @@
 ---
-import type { MarkdownInstance } from "astro";
-interface Frontmatter {
-  title: string;
-  description?: string;
-}
+import { getCollection } from "astro:content";
 
-const posts = Object.values(
-  import.meta.glob<MarkdownInstance<Frontmatter>>(
-    "../content/articles/**/*.md",
-    { eager: true },
-  ),
-);
+const posts = await getCollection('articles');
 ---
-
-<div>
+<p>全{posts.length}件</p>
+<div class="article-cards">
   {
-    posts.slice(0, 4).map((post) => (
-      <article>
-        <h2>{post.frontmatter.title}</h2>
-        <p>{post.frontmatter.description}</p>
-        <a href={post.url}>Read more</a>
-      </article>
+    posts.map((post: { data: { title: string; description: string; }; id: any; }) => (
+      <div class="article-card">
+        <h2>{post.data.title}</h2>
+        <p>{post.data.description}</p>
+        <a href={`/articles/${post.id}`}>Read more</a>
+      </div>
     ))
   }
 </div>
@@ -28,11 +19,19 @@ const posts = Object.values(
 <style>
   .article-cards {
     display: flex;
-
+    flex-wrap: wrap;
   }
 
-  .article-card h2 {
-    background-color: aqua;
+  .article-card {
+    margin: 6px;
+    padding: 12px;
     border: 1px solid black;
+    border-radius: 16px;
+  }
+
+  .article-card a {
+    border: 1px solid black;
+    border-radius: 6px;
+    text-decoration: none;
   }
 </style>

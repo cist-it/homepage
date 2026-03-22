@@ -6,12 +6,13 @@ const {articleData} = Astro.props;
     <meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
     <title>{articleData.title}</title>
-    <style>pre{padding:12px}</style>
   </head>
   <body>
+    <header><!--ここにヘッダ--></header>
     <h1>{articleData.title}</h1>
      by {articleData.author}
     <p>Written on: {articleData.pubDate.toISOString()}</p>
     <slot />
+    <footer><!--ここにフッタ--></footer>
   </body>
 </html>
