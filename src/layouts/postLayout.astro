@@ -1,13 +1,17 @@
 ---
-const { frontmatter } = Astro.props;
+const {articleData} = Astro.props;
 ---
 <html>
   <head>
-    <title>{frontmatter.title}</title>
+    <meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+    <title>{articleData.title}</title>
+    <style>pre{padding:12px}</style>
   </head>
   <body>
-    <h1>{frontmatter.title} by {frontmatter.author}</h1>
+    <h1>{articleData.title}</h1>
+     by {articleData.author}
+    <p>Written on: {articleData.pubDate.toISOString()}</p>
     <slot />
-    <p>Written on: {frontmatter.date}</p>
   </body>
 </html>
