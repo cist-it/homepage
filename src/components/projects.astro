@@ -1,0 +1,70 @@
+---
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("projects");
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<section class="background">
+  <h1>Projects</h1>
+  <p>メンバーが作成したプロジェクトを紹介します</p>
+</section>
+<div class="project-cards">
+  {
+    posts.map(
+      (post: { data: { title: string; description: string }; id: any }) => (
+        <div class="project-card">
+          <img src="/src/assets/astro.svg" class="card-img" />
+          <a href={`/projects/${post.id}`}>
+            <h2>{post.data.title}</h2>
+          </a>
+          <p>{post.data.description}</p>
+        </div>
+      ),
+    )
+  }
+</div>
+
+<style>
+  .project-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2列にする */
+    gap: 20px; /* 枠の間のスペース */
+    margin: 40px;
+  }
+
+  .project-card {
+    width: auto;
+    padding: 30px;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .project-card a {
+    border-radius: 6px;
+    text-decoration: none;
+  }
+
+  .card-img {
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  .background {
+    background-color: #73bcc9;
+    padding: 5rem 2rem;
+  }
+
+  .background h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 3rem;
+    font-weight: bold;
+  }
+
+  .background p {
+    text-align: center;
+  }
+</style>
