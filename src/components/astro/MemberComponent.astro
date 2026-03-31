@@ -1,11 +1,93 @@
 ---
-import type { CollectionEntry } from 'astro:content';
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
 
-type Props = CollectionEntry<'members'>['content'];
+const selfintros = await getCollection("members");
+console.log(selfintros);
 
-const {name, role, hobby} = Astro.props;
+const roles = Object.freeze({
+  leader: "サークル長",
+  sub_leader: "副サークル長",
+  app_converter: "アプリ開発部門",
+  unity: "Unity部門",
+});
 ---
 
-<a href="/posts/sample">dfsa</a>
-{name},{role},{hobby}
-<slot />
+<div class="picture">
+  <div class="texts">
+    <h1>Members</h1>
+    <p>CIST ITのメンバーを紹介します</p>
+  </div>
+</div>
+
+<div class="selfintro-cards">
+  {
+    selfintros.map(
+      (post: { data: { name: string; iconsrc: any }; id: any }) => (
+        <a href={`/members/${post.id}`} class="selfintro-card">
+          <Image
+            src={post.data.iconsrc}
+            widths={[180, 360, 720]}
+            sizes="(max-width: 768px) 180px, (max-width: 1024px) 360px, 720px"
+            quality={80}
+            alt="アイコン"
+            class="icon"
+          />
+          <div class="name">
+            <h2>{post.data.name}</h2>
+            <h4>{post.id.replace("_", " ")}</h4>
+          </div>
+        </a>
+      ),
+    )
+  }
+</div>
+
+<style>
+  body {
+    margin: 0;
+  }
+  a {
+    color: black;
+    text-decoration: none;
+  }
+  .picture {
+    text-align: center;
+    background-color: rgb(50, 113, 167);
+    height: 20em;
+  }
+  .picture .texts {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .selfintro-cards {
+    background-color: rgb(240, 243, 250);
+    padding: 25px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .selfintro-card {
+    background-color: white;
+    width: calc(50% - 175px);
+    padding: 80px 50px;
+    margin: 50px 25px 0 50px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 4px;
+    border-radius: 4%;
+    line-height: 0.5;
+    display: flex;
+  }
+  .selfintro-card h4 {
+    color: gray;
+    font-weight: normal;
+  }
+  .name {
+    padding: 2em;
+  }
+
+  .icon {
+    width: 40%;
+    height: auto;
+    border-radius: 50%;
+  }
+</style>
