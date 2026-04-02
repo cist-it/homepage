@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
+import "../../styles/global.css";
 
 const selfintros = await getCollection("members");
 console.log(selfintros);
@@ -13,29 +14,36 @@ const roles = Object.freeze({
 });
 ---
 
-<div class="picture">
-  <div class="texts">
+<div
+  class="picture flex items-center justify-center text-center bg-[#3271A7] text-2xl lg:text-4xl decoration-from-font h-60 lg:h-80"
+>
+  <div class="texts tracking-normal">
     <h1>Members</h1>
-    <p>CIST ITのメンバーを紹介します</p>
+    <p class="text-gray-400 text-sm lg:text-lg">
+      CIST ITのメンバーを紹介します
+    </p>
   </div>
 </div>
 
-<div class="selfintro-cards">
+<div class="selfintro-cards bg-[#F0F3FA] p-8 lg:p-10 flex flex-wrap">
   {
     selfintros.map(
       (post: { data: { name: string; iconsrc: any }; id: any }) => (
-        <a href={`/members/${post.id}`} class="selfintro-card">
+        <a
+          href={`/members/${post.id}`}
+          class="selfintro-card flex bg-white w-[calc(100%)] lg:w-[calc(50%-96px)] px-10 py-15 lg:py-20 mb-8 lg:m-12 rounded-xl leading-5"
+        >
           <Image
             src={post.data.iconsrc}
             widths={[180, 360, 720]}
             sizes="(max-width: 768px) 180px, (max-width: 1024px) 360px, 720px"
             quality={80}
             alt="アイコン"
-            class="icon"
+            class="icon w-3/10 lg:w-2/5 h-auto rounded-full"
           />
-          <div class="name">
-            <h2>{post.data.name}</h2>
-            <h4>{post.id.replace("_", " ")}</h4>
+          <div class="name flex flex-col justify-center pl-5 lg:pl-9">
+            <h2 class="text-lg lg:text-xl font-bold">{post.data.name}</h2>
+            <h4 class="text-gray-400">{post.id.replace("_", " ")}</h4>
           </div>
         </a>
       ),
@@ -51,43 +59,14 @@ const roles = Object.freeze({
     color: black;
     text-decoration: none;
   }
-  .picture {
-    text-align: center;
-    background-color: rgb(50, 113, 167);
-    height: 20em;
-  }
-  .picture .texts {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  .selfintro-cards {
-    background-color: rgb(240, 243, 250);
-    padding: 25px;
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .selfintro-card {
-    background-color: white;
-    width: calc(50% - 175px);
-    padding: 80px 50px;
-    margin: 50px 25px 0 50px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0 0 4px;
-    border-radius: 4%;
-    line-height: 0.5;
-    display: flex;
-  }
-  .selfintro-card h4 {
-    color: gray;
-    font-weight: normal;
-  }
-  .name {
-    padding: 2em;
-  }
 
-  .icon {
-    width: 40%;
-    height: auto;
-    border-radius: 50%;
+  .selfintro-card {
+    box-shadow: -8px 8px 0px #3a6c9d;
+    transition: 0.3s;
+  }
+  .selfintro-card:hover {
+    box-shadow: unset;
+    transform: translate(-4px, 4px);
+    box-shadow: -4px 4px 0px #3a6c9d;
   }
 </style>
