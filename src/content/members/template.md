@@ -1,7 +1,10 @@
 ---
 # ファイル名は"ローマ字姓_名"とする
+title: fjdlksj
 name: 科技大太郎 #姓名の間にスペースは不要
 role: サークル長 #サークル長、副サークル長、Unity部門、アプリ開発部門から選んで記入。複数記入の際は"、"で区切る
 iconsrc: ../../assets/nagayaharuto.png
 hobby: ゴルフ
 ---
+
+## fdjaskojfdoi

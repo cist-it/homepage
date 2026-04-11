@@ -14,4 +14,4 @@ const { selfintro } = Astro.props;
 const { Content } = await render(selfintro);
 ---
 
-<BaseLayout pageData="selfintro.data"><Content /></BaseLayout>
+<BaseLayout {...selfintro.data}><Content /></BaseLayout>

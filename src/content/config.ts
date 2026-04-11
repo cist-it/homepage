@@ -5,6 +5,7 @@ const membersCollection = defineCollection({
   loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/members" }),
   schema: ({ image }) =>
     z.object({
+      title: z.string(),
       name: z.string(),
       role: z.string(),
       hobby: z.string().optional(),
