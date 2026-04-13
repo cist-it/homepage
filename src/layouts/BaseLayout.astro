@@ -1,0 +1,84 @@
+---
+import Image from "astro/components/Image.astro";
+import type { CollectionEntry } from "astro:content";
+import "../styles/global.css";
+
+type Props = CollectionEntry<"members">["data"];
+
+const { title, iconsrc, name, role, hobby } = Astro.props;
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} | メンバー紹介</title>
+  </head>
+  <body class="bg-slate-50 text-slate-800 font-sans antialiased">
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
+      <div class="flex flex-col md:flex-row gap-8 lg:gap-12">
+        <!-- プロフィール -->
+        <aside class="w-full md:w-1/3">
+          <div
+            class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 flex flex-col items-center md:items-start text-center md:text-left sticky top-12 lg:top-20"
+          >
+            <Image
+              src={iconsrc}
+              alt={`${name}のアイコン`}
+              widths={[180, 360, 720]}
+              sizes="(max-width: 768px) 180px, (max-width: 1024px) 360px, 720px"
+              quality={80}
+              class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover shadow-sm mb-5 border-4 border-white ring-1 ring-slate-100"
+            />
+
+            <h1 class="text-2xl font-bold text-slate-900 mb-1">{name}</h1>
+            <p class="text-sm font-medium text-blue-600 mb-5">{role}</p>
+
+            <div class="w-full border-t border-slate-100 pt-5 mt-2">
+              <h3
+                class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 flex items-center justify-center md:justify-start gap-1"
+              >
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  ></path></svg
+                >
+                Hobby
+              </h3>
+              <p
+                class="text-sm text-slate-600 bg-slate-50 rounded-lg px-4 py-3 leading-relaxed"
+              >
+                {hobby}
+              </p>
+            </div>
+          </div>
+        </aside>
+
+        <!-- 記事の内容 -->
+        <article
+          class="w-full md:w-2/3 bg-white rounded-2xl shadow-sm border border-slate-100 p-6 md:p-10 lg:p-12"
+        >
+          <h2
+            class="text-2xl md:text-3xl font-extrabold text-slate-900 mb-8 pb-6 border-b border-slate-100 leading-tight"
+          >
+            {title}
+          </h2>
+
+          <div
+            class="prose prose-slate prose-a:text-blue-600 hover:prose-a:text-blue-500 max-w-none"
+          >
+            <slot />
+          </div>
+        </article>
+      </div>
+    </main>
+  </body>
+</html>

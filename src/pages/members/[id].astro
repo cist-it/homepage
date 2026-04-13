@@ -1,0 +1,17 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const selfintros = await getCollection("members");
+  return selfintros.map((selfintro) => ({
+    params: { id: selfintro.id },
+    props: { selfintro },
+  }));
+}
+// 2. For your template, you can get the entry directly from the prop
+const { selfintro } = Astro.props;
+const { Content } = await render(selfintro);
+---
+
+<BaseLayout {...selfintro.data}><Content /></BaseLayout>

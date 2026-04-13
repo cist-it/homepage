@@ -1,0 +1,72 @@
+---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import "../../styles/global.css";
+
+const selfintros = await getCollection("members");
+console.log(selfintros);
+
+const roles = Object.freeze({
+  leader: "サークル長",
+  sub_leader: "副サークル長",
+  app_converter: "アプリ開発部門",
+  unity: "Unity部門",
+});
+---
+
+<div
+  class="picture flex items-center justify-center text-center bg-[#3271A7] text-2xl lg:text-4xl decoration-from-font h-60 lg:h-80"
+>
+  <div class="texts tracking-normal">
+    <h1>Members</h1>
+    <p class="text-gray-400 text-sm lg:text-lg">
+      CIST ITのメンバーを紹介します
+    </p>
+  </div>
+</div>
+
+<div class="selfintro-cards bg-[#F0F3FA] p-8 lg:p-10 flex flex-wrap">
+  {
+    selfintros.map(
+      (post: { data: { name: string; iconsrc: any }; id: any }) => (
+        <a
+          href={`/members/${post.id}`}
+          class="selfintro-card flex bg-white w-[calc(100%)] lg:w-[calc(50%-96px)] px-10 py-15 lg:py-20 mb-8 lg:m-12 rounded-xl leading-5"
+        >
+          <Image
+            src={post.data.iconsrc}
+            widths={[180, 360, 720]}
+            sizes="(max-width: 768px) 180px, (max-width: 1024px) 360px, 720px"
+            quality={80}
+            alt="アイコン"
+            class="icon w-3/10 lg:w-2/5 h-auto rounded-full"
+          />
+          <div class="name flex flex-col justify-center pl-5 lg:pl-9">
+            <h2 class="text-lg lg:text-xl font-bold">{post.data.name}</h2>
+            <h4 class="text-gray-400">{post.id.replace("_", " ")}</h4>
+          </div>
+        </a>
+      ),
+    )
+  }
+</div>
+
+<style>
+  body {
+    margin: 0;
+  }
+  a {
+    color: black;
+    text-decoration: none;
+  }
+
+  .selfintro-card {
+    box-shadow: -8px 8px 0px #3a6c9d;
+    transition: 0.3s;
+  }
+  .selfintro-card:hover {
+    box-shadow: unset;
+    transform: translate(-4px, 4px);
+    box-shadow: -4px 4px 0px #3a6c9d;
+  }
+</style>
