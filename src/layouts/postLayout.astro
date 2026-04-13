@@ -1,18 +1,91 @@
 ---
-const {articleData} = Astro.props;
+const { articleData } = Astro.props;
 ---
+
 <html>
   <head>
     <meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width" />
     <title>{articleData.title}</title>
+    <style>
+      body {
+        margin: 0;
+      }
+
+      .titleBar {
+        background-color: #73bcc9;
+        display: flex;
+        width: 100%;
+        height: 400px;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .titleBar h1 {
+        text-align: center;
+      }
+
+      .publisher {
+        display: flex;
+        padding: 0 5vw;
+        gap: 20px;
+        border-bottom: #000;
+        margin: 20px 0;
+      }
+
+      .publisher p {
+        font-size: large;
+      }
+
+      .pubDate {
+        margin-left: auto;
+        font-size: small;
+      }
+
+      .article-main {
+        padding: 0 5vw;
+      }
+
+      .tags {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .tag {
+        background-color: antiquewhite;
+        color: #000;
+        padding: 6px;
+        border-radius: 4px;
+        font-size: small;
+        height: fit-content;
+      }
+    </style>
   </head>
-  <body>
+  <body class="m-0">
     <header><!--ここにヘッダ--></header>
-    <h1>{articleData.title}</h1>
-     by {articleData.author}
-    <p>Written on: {articleData.pubDate.toISOString()}</p>
-    <slot />
+    <div class="titleBar flex">
+      <h1>{articleData.title}</h1>
+      <span
+        >{articleData.tags.length > 0 && "タグ: "}{
+          articleData.tags.join(",")
+        }</span
+      >
+    </div>
+    <div class="publisher">
+      <p>@{articleData.author}</p>
+      <div class="tags">
+        {articleData.tags.map((tg: string) => <div class="tag">{tg}</div>)}
+      </div>
+      <span class="pubDate"
+        >更新日:{articleData.pubDate.toLocaleString("ja-jp")}</span
+      >
+    </div>
+    <main class="article-main">
+      <slot />
+    </main>
     <footer><!--ここにフッタ--></footer>
   </body>
 </html>
