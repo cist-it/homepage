@@ -1,0 +1,37 @@
+---
+import { getCollection } from "astro:content";
+
+const posts = await getCollection('articles');
+---
+<p>全{posts.length}件</p>
+<div class="article-cards">
+  {
+    posts.map((post: { data: { title: string; description: string; }; id: any; }) => (
+      <div class="article-card">
+        <h2>{post.data.title}</h2>
+        <p>{post.data.description}</p>
+        <a href={`/articles/${post.id}`}>Read more</a>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .article-cards {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .article-card {
+    margin: 6px;
+    padding: 12px;
+    border: 1px solid black;
+    border-radius: 16px;
+  }
+
+  .article-card a {
+    border: 1px solid black;
+    border-radius: 6px;
+    text-decoration: none;
+  }
+</style>
